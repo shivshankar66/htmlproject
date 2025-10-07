@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
-    envirnoment {
+    environment {
         DOCKER_CREDENTIALS = credentials('docker-hub-login')
         DOCKER_IMAGE = 'shivam193/htmlproj:latest'
 
@@ -15,7 +15,7 @@ pipeline {
         stage('Build docker image') {
             steps {
                 bat """ 
-                docker build -t %DOCKER_IMAGE%:latest .
+                docker build -t %DOCKER_IMAGE% .
                 """
             }
         }
@@ -23,7 +23,7 @@ pipeline {
             steps {
                 bat """
                 echo %DOCKER_CREDENTIALS_PSW% | docker login -u %DOCKER_CREDENTIALS_USR% --password-stdin
-                docker push %DOCKER_IMAGE%:latest
+                docker push %DOCKER_IMAGE%
                 """
             }
         }
