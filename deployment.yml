@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploys-k8
+  labels: 
+    app: html-deploys
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: html-deploys
+  template:
+    metadata:
+      labels:
+        app: html-deploys
+    spec:
+      containers:
+      - name: html-deploys
+        image: shivam193/htmlproj:30
+        ports:
+        - containerPort: 80
